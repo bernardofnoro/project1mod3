@@ -34,7 +34,21 @@ router.get("/index/:id", (req, res) => {
 
 router.post("/", (req, res) => {
     const beer = req.body;
-     const id = listacerveja.length;
+    const id = listacerveja.length;
+    if(!req.body.nome){
+        res.status(400).json({message: "o campo nome é obrigatorio"});
+        return;
+    }else if(!req.body.origem){
+        res.status(400).json({message: "o campo origem é obrigatorio"});
+        return;
+    }
+    else if(!req.body.teoralcoolico){
+        res.status(400).json({message: "o campo teor alcoolico é obrigatorio"});
+        return; 
+    }else if(!req.body.slogan){
+        res.status(400).json({message: "o campo slogan é obrigatorio"});
+        return; 
+    }
     listacerveja.push(beer);
     res.status(200).json({ message: `Beer Successfully added ! Beer ID: ${id}` });
 });

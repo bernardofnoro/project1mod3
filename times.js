@@ -32,7 +32,21 @@ router.get("/index/:id", (req, res) => {
 
 router.post("/", (req, res) => {
     const team = req.body;
-     const id = listatimes.length;
+    const id = listatimes.length;
+    if(!req.body.nome){
+        res.status(400).json({message: "o campo nome é obrigatorio"});
+        return;
+    }else if(!req.body.fundacao){
+        res.status(400).json({message: "o campo fundação é obrigatorio"});
+        return;
+    }
+    else if(!req.body.mascote){
+        res.status(400).json({message: "o campo mascote é obrigatorio"});
+        return; 
+    }else if(!req.body.tecnico){
+        res.status(400).json({message: "o campo tecnico é obrigatorio"});
+        return; 
+    }
     listatimes.push(team);
     res.status(200).json({ message: `Sports Team Successfully added ! Team ID: ${id}` });
 });
@@ -47,7 +61,7 @@ router.put("/:id", (req, res) => {
         res.status(404).json(` Sports Team ID:${id} not found!` );
     } else {
         listatimes[id] = team;
-        res.status(200).json({ message: `Sports Team Successfully Modified! Recipe ID: ${id}` });
+        res.status(200).json({ message: `Sports Team Successfully Modified! Team ID: ${id}` });
     }
 });
 

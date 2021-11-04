@@ -43,7 +43,21 @@ router.get("/index/:id", (req, res) => {
 
 router.post("/", (req, res) => {
     const game = req.body;
-     const id = listajogos.length;
+    const id = listajogos.length;
+    if(!req.body.nome){
+        res.status(400).json({message: "o campo nome é obrigatorio"});
+        return;
+    }else if(!req.body.lancamento){
+        res.status(400).json({message: "o campo lançamento é obrigatorio"});
+        return;
+    }
+    else if(!req.body.plataforma){
+        res.status(400).json({message: "o campo plataforma é obrigatorio"});
+        return; 
+    }else if(!req.body.desenvolvedor){
+        res.status(400).json({message: "o campo desenvolvedor é obrigatorio"});
+        return; 
+    }
     listajogos.push(game);
     res.status(200).json({ message: `Game Successfully added ! Game ID: ${id}` });
 });
